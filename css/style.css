@@ -22,8 +22,11 @@ textarea::-webkit-scrollbar-thumb{
 	width: 50px;
 	font-size: 30px;
 }
-.side-menu *{
-	margin-top: 5px;
+.side-menu .box{
+	margin-top: -8px;
+}
+.side-menu .box *{
+	margin-top: 10px;
 	cursor: pointer;
 	text-align: center;
 }
@@ -61,7 +64,7 @@ textarea::-webkit-scrollbar-thumb{
 .separator{
 	margin-top: 15px;
 }
-.content .container *{
+.content .contain *{
 	margin-left: 0px;
 }
 
@@ -120,6 +123,20 @@ textarea::-webkit-scrollbar-thumb{
 	margin-top: 5px;
 	margin-left: 5px;
 }
+.libs-window input{
+	width: 95%;
+	height: 20px;
+	border-style: none;
+}
+.libs-window button{
+	width: 80%;
+	height: 30px;
+	border-style: none;
+	margin-left: 8%;
+	border-radius: 5px;
+	font-size: 20px;
+	cursor: pointer;
+}
 
 .config-window{
 	position: fixed;
@@ -154,10 +171,11 @@ textarea::-webkit-scrollbar-thumb{
 .archive-window input{
 	width: 88.7%;
 	height: 30px;
-	margin-top: 13px;
+	margin-top: 14px;
 	margin-left: 5%;
 	border-style: none;
 	padding-left: 5px;
 	font-size: 20px;
 	color: #fff;
+	border-radius: 5px;
 }

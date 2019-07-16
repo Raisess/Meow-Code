@@ -24,23 +24,28 @@
 <body id="body" style="margin: 0; position: fixed; font-family: sans-serif;	width: 100%; height: 100%; font-size: 17px;">
 	<div class="app">
 		<div class="side-menu" id="sideMenu">
-			<div class="open-libs" id="openLibs" title="adicionar libs">
-				<i class="fas fa-file-archive"></i>
-			</div>
-			<div class="export-file" title="exportar projeto" id="exportFile">
-				<i class="fas fa-truck"></i>
-			</div>
-			<div class="open-config" id="openConfig" title="configurações">
-				<i class="fas fa-cog"></i>
+			<div class="box">
+				<div class="open-libs" id="openLibs" title="adicionar libs">
+					<i class="fas fa-file-archive"></i>
+				</div>
+				<div class="import-file" title="importar projeto" id="importFile">
+					<i class="fas fa-file-alt"></i>
+				</div>
+				<div class="export-file" title="exportar projeto" id="exportFile">
+					<i class="fas fa-truck"></i>
+				</div>
+				<div class="open-config" id="openConfig" title="configurações">
+					<i class="fas fa-cog"></i>
+				</div>
 			</div>
 		</div>
 		<div class="new-window">
 			<div class="libs-window" id="libsWindow" style="display: none;">
-				<input style="width: 95%; height: 20px; border-style: none;" type="text" id="jsLib0" placeholder="js lib 0" />
-				<input style="width: 95%; height: 20px; border-style: none;" type="text" id="cssLib0" placeholder="css lib 0" />
-				<input style="width: 95%; height: 20px; border-style: none;" type="text" id="jsLib1" placeholder="js lib 1" />
-				<input style="width: 95%; height: 20px; border-style: none;" type="text" id="cssLib1" placeholder="css lib 1" />
-				<button style="width: 80%; height: 30px; border-style: none; margin-left: 8%; border-radius: 5px; font-size: 20px; cursor: pointer;" id="setLibs">set libs</button>
+				<input type="text" id="jsLib0" placeholder="js lib 0" />
+				<input type="text" id="cssLib0" placeholder="css lib 0" />
+				<input type="text" id="jsLib1" placeholder="js lib 1" />
+				<input type="text" id="cssLib1" placeholder="css lib 1" />
+				<button id="setLibs">set libs</button>
 			</div>
 			<div class="config-window" id="configWindow" style="display: none;">
 				<div class="config-container" id='configContainer'>
@@ -62,6 +67,9 @@
 			</div>
 			<div class="archive-window" id="archiveWindow" style="display: none;">
 				<input type="text" id="archiveNameExport" placeholder="nome do arquivo" />
+			</div>
+			<div class="archive-window" id="importWindow" style="display: none;">
+				<input type="text" id="archiveNameImport" placeholder="nome do arquivo" />
 			</div>
 		</div>
 		<div class="main">
@@ -87,7 +95,9 @@
 				<p class="separator">|</p>
 				<p>font-size:</p>
 				<input type="number" class="footer-label" id="fontSize" value="17" />
-				<div class="container" style="display: flex; position: fixed; right: 10px;">
+				<p class="separator">|</p>
+				<b style="margin-top: -1px;"><p id="event" style="color: orange; text-decoration: underline;"></p></b>
+				<div class="contain" style="display: flex; position: fixed; right: 10px;">
 					<p style="color: #fff;">><b style="text-decoration: underline; color: yellow">Ctrl+Shift+I</b></p>
 					<p style="color: #fff;">&nbsp;para abrir o console!</p>
 				</div>
@@ -98,18 +108,36 @@
 		// exportar o projeto
 		const fs = require('fs');
 
-		document.addEventListener('keydown', (keydown) => {
+		document.getElementById('archiveNameExport').addEventListener('keydown', (keydown) => {
 		  switch (keydown.keyCode) {
 		  	case 13: // ENTER
 		  		exportFile();
-		  		break;
-		  	case 27: // ESC
-		  		document.getElementById('archiveWindow').style.display = 'none';
 		  		break;
 		  	default:
 		  		null;
 		  		break;
 		  }
+		});
+		document.getElementById('archiveNameImport').addEventListener('keydown', (keydown) => {
+		  switch (keydown.keyCode) {
+		  	case 13: // ENTER
+		  		importFile();
+		  		break;
+		  	default:
+		  		null;
+		  		break;
+		  }
+		});
+		document.addEventListener('keydown', (keydown) => {
+			switch (keydown.keyCode) {
+				case 27: // ESC
+		  		document.getElementById('archiveWindow').style.display = 'none';
+		  		document.getElementById('importWindow').style.display = 'none';
+		  		break;
+		  	default:
+		  		null;
+		  		break;
+			}
 		});
 
 		// salvar e criar arquivo
@@ -123,13 +151,30 @@
 				if(error){
 					throw error;
 				}
-
-				console.log('projeto exportado');
-				alert('projeto exportado');
-
+				console.log('projeto salvo');
 			});
-			name.value = '';
+
 			document.getElementById('archiveWindow').style.display = 'none';
+			document.getElementById('event').innerHTML = name.value+'.html salvo!';
+			name.value = '';
+		}
+		// importar a arquivo
+		function importFile(){
+
+			let name = document.getElementById('archiveNameImport');
+
+			fs.readFile("./build/"+name.value+".html", (error, content)=>{
+
+				if(error){
+					throw error;
+				}
+				console.log('arquivo importado: '+name.value+'.html');
+				document.getElementById('input').value = content;
+			});
+
+			document.getElementById('importWindow').style.display = 'none';
+			document.getElementById('event').innerHTML = 'arquivo importado: '+name.value+'.html';
+			name.value = '';
 		}
 
 		// ler projeto
@@ -140,7 +185,7 @@
 			}
 
 			document.getElementById('input').value = content;
-		})
+		});
 	</script>
 	<script src="./theme.js"></script>
 	<script src="./js/snippets.js"></script>

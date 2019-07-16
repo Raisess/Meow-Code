@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.0.8';
+const version = '0.1.0';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -208,6 +208,17 @@ const setArchiveName = ()=>{
 }
 setArchiveName();
 
+const openImportArchive = ()=>{
+
+	const importWindow = document.getElementById('importWindow');
+	const importFileBtn = document.getElementById('importFile');
+
+	importFileBtn.addEventListener('click', () => {
+	  importWindow.style.display = '';
+	});
+}
+openImportArchive();
+
 // ativar as configurações e tema
 const setConfig = ()=>{
 
@@ -220,6 +231,8 @@ const setConfig = ()=>{
 	let libsWindowBtn = document.getElementById('setLibs');
 	const windowExport = document.getElementById('archiveWindow');
 	let windowExportLabel = document.getElementById('archiveNameExport');
+	const windowImport = document.getElementById('importWindow');
+	let windowImportLabel = document.getElementById('archiveNameImport');
 
 	let importFont = document.getElementById('newFont');
 
@@ -243,6 +256,8 @@ const setConfig = ()=>{
 	configContainer.style.color = config.background.fontColor;
 	windowExport.style.backgroundColor = config.sideMenu.color;
 	windowExportLabel.style.backgroundColor = config.background.color;
+	windowImport.style.backgroundColor = config.sideMenu.color;
+	windowImportLabel.style.backgroundColor = config.background.color;
 
 	importFont.href = config.code.fontImportLink;
 }
