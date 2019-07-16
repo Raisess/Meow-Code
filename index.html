@@ -27,7 +27,7 @@
 			<div class="open-libs" id="openLibs" title="adicionar libs">
 				<i class="fas fa-file-archive"></i>
 			</div>
-			<div class="export-file" title="exportar projeto" onclick="exportFile()">
+			<div class="export-file" title="exportar projeto" id="exportFile">
 				<i class="fas fa-truck"></i>
 			</div>
 			<div class="open-config" id="openConfig" title="configurações">
@@ -50,7 +50,7 @@
 							<p>Tempo de inicialização: <b id="startTime"></b>ms</p>
 						</div>
 					</div>
-					<hr />
+					<hr style="width: 95%; margin-left: 0;" />
 					<div class="ide-container">
 						<h4>IDE</h4>
 						<div>
@@ -59,6 +59,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="archive-window" id="archiveWindow" style="display: none;">
+				<input type="text" id="archiveNameExport" placeholder="nome do arquivo" />
 			</div>
 		</div>
 		<div class="main">
@@ -95,9 +98,27 @@
 		// exportar o projeto
 		const fs = require('fs');
 
+		document.addEventListener('keydown', (keydown) => {
+		  switch (keydown.keyCode) {
+		  	case 13: // ENTER
+		  		exportFile();
+		  		break;
+		  	case 27: // ESC
+		  		document.getElementById('archiveWindow').style.display = 'none';
+		  		break;
+		  	default:
+		  		null;
+		  		break;
+		  }
+		});
+
+		// salvar e criar arquivo
 		function exportFile(){
 
-			fs.writeFile("./build/index.html", document.getElementById('input').value, (error)=>{
+			// nome do arquivo
+			let name = document.getElementById('archiveNameExport');
+			// escrever
+			fs.writeFile('./build/'+name.value+'.html', document.getElementById('input').value, (error)=>{
 
 				if(error){
 					throw error;
@@ -107,7 +128,19 @@
 				alert('projeto exportado');
 
 			});
+			name.value = '';
+			document.getElementById('archiveWindow').style.display = 'none';
 		}
+
+		// ler projeto
+		fs.readFile("./build/index.html", (error, content)=>{
+
+			if(error){
+				throw error;
+			}
+
+			document.getElementById('input').value = content;
+		})
 	</script>
 	<script src="./theme.js"></script>
 	<script src="./js/snippets.js"></script>

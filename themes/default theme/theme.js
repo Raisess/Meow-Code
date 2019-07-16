@@ -8,8 +8,8 @@ const config = {
 	code: {
 		fontColor: '#2dc41f',
 		fontSize: '17px',
-		fontImportLink: '',
-		fontFamily: ''
+		fontImportLink: 'https://fonts.googleapis.com/css?family=Ubuntu&display=swap',
+		fontFamily: 'Ubuntu, sans-serif'
 	},
 	sideMenu: {
 		color: '#5a3678',

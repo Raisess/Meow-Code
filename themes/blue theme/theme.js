@@ -8,8 +8,8 @@ const config = {
 	code: {
 		fontColor: '#8599ed',
 		fontSize: '17px',
-		fontImportLink: '',
-		fontFamily: ''
+		fontImportLink: 'https://fonts.googleapis.com/css?family=Muli&display=swap',
+		fontFamily: 'Muli, sans-serif'
 	},
 	sideMenu: {
 		color: '#314494',

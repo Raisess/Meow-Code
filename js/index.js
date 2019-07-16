@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.0.7';
+const version = '0.0.8';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -22,7 +22,9 @@ const errors = [
 
 // snippets padrão
 const defaultSnippets = [
- 'html'
+ 'html',
+ 'react',
+ 'boots'
 ]
 
 // aplicar o preview
@@ -47,6 +49,12 @@ const debug = ()=>{
 		}
 		else if(toDebug.value === defaultSnippets[0]){ // boilerplate HTML5
 			toDebug.value = snippets[0];
+		}
+		else if(toDebug.value === defaultSnippets[1]){ // add react
+			toDebug.value = snippets[1];
+		}
+		else if(toDebug.value === defaultSnippets[2]){ // add bootstrap
+			toDebug.value = snippets[2];
 		}
 		// aplicar o cádigo para saida
 		else{
@@ -153,16 +161,11 @@ const bottomUtilities = ()=>{
 
 		document.getElementById('font').innerHTML = config.code.fontSize;
 
-		label.addEventListener('keydown', (keydown) => {
-			switch (keydown.keyCode) {
-				case 13:
-					input.style.fontSize = label.value+'px';
-					document.getElementById('font').innerHTML = label.value+'px';
-					break;
-				default:
-					null;
-					break;
-			}
+		label.addEventListener('blur', () => {
+
+			input.style.fontSize = label.value+'px';
+			document.getElementById('font').innerHTML = label.value+'px';
+
 		});
 	}
 	setFontSize();
@@ -194,6 +197,17 @@ const setLibs = ()=>{
 }
 setLibs();
 
+const setArchiveName = ()=>{
+
+	const exportFileBtn = document.getElementById('exportFile');
+	const archiveWindow = document.getElementById('archiveWindow');
+
+	exportFileBtn.addEventListener('click', () => {
+	  archiveWindow.style.display = '';
+	});
+}
+setArchiveName();
+
 // ativar as configurações e tema
 const setConfig = ()=>{
 
@@ -204,6 +218,8 @@ const setConfig = ()=>{
 	const configContainer = document.getElementById('configContainer');
 	let libsWindow = document.getElementById('libsWindow');
 	let libsWindowBtn = document.getElementById('setLibs');
+	const windowExport = document.getElementById('archiveWindow');
+	let windowExportLabel = document.getElementById('archiveNameExport');
 
 	let importFont = document.getElementById('newFont');
 
@@ -225,6 +241,8 @@ const setConfig = ()=>{
 	configWindow.style.backgroundColor = config.configWindow.color;
 	configContainer.style.backgroundColor = config.sideMenu.color;
 	configContainer.style.color = config.background.fontColor;
+	windowExport.style.backgroundColor = config.sideMenu.color;
+	windowExportLabel.style.backgroundColor = config.background.color;
 
 	importFont.href = config.code.fontImportLink;
 }
