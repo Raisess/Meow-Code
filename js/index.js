@@ -4,48 +4,51 @@
 */
 // Meow Code
 
-const version = '0.0.6';
-
+// versão do código
+const version = '0.0.7';
+// aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
+// indetificador e retorno de erros
 const errorStyle = 'color: red; text-align: center; margin-top: 30%;';
-
 const errors = [
 	[
 		'',
-		'fodase'
 	],
 	[
 		`<h3 style="${errorStyle}">parece que não à nada no seu HTML!</h3>`,
-		'fodase vc'
 	]
 ];
 
+// snippets padrão
 const defaultSnippets = [
  'html'
 ]
 
+// aplicar o preview
 const debug = ()=>{
 	
+	// saida da previa
 	const debugWindow = document.querySelector('#output');
+	// valor do textarea
 	const toDebug = document.querySelector('#input');
 
+	// valor padrão da previa
 	debugWindow.innerHTML = '<h3 style="color: blue; text-align: center; margin-top: 30%;">previa do seu projeto</h3>';
 
+	// checar o valor do textarea
 	toDebug.addEventListener('blur', () => {
 
-		if(toDebug.value === errors[0][0]){
+		if(toDebug.value === errors[0][0]){ //retorna o erro de valor null || undefined
 			debugWindow.innerHTML = errors[1][0];
 		}
-		else if(toDebug.value === 'creator'){
+		else if(toDebug.value === 'creator'){ // easter egg
 			debugWindow.innerHTML = '<p><b>Danilo Santana</b></p>';
 		}
-		else if(toDebug.value === errors[0][1]){
-			debugWindow.innerHTML = errors[1][1];
-		}
-		else if(toDebug.value === defaultSnippets[0]){
+		else if(toDebug.value === defaultSnippets[0]){ // boilerplate HTML5
 			toDebug.value = snippets[0];
 		}
+		// aplicar o cádigo para saida
 		else{
 			debugWindow.innerHTML = `${toDebug.value}`;	
 		}
@@ -55,8 +58,10 @@ const debug = ()=>{
 }
 debug();
 
+// opções da barra lateral
 const sideOptions = ()=>{
 
+	// adicionar bibliotecas
 	const addLibs = ()=>{
 
 		const libsBtn = document.querySelector('#openLibs');
@@ -78,6 +83,7 @@ const sideOptions = ()=>{
 	}
 	addLibs();
 
+	// configurações
 	const configs = ()=>{
 
 		const configWindow = document.querySelector('#configWindow');
@@ -102,6 +108,7 @@ const sideOptions = ()=>{
 }
 sideOptions();
 
+// utilidades da barrra de rodapé
 const bottomUtilities = ()=>{
 
 	function clock(){
@@ -144,10 +151,13 @@ const bottomUtilities = ()=>{
 		const label = document.getElementById('fontSize');
 		let input = document.getElementById('input');
 
+		document.getElementById('font').innerHTML = config.code.fontSize;
+
 		label.addEventListener('keydown', (keydown) => {
 			switch (keydown.keyCode) {
 				case 13:
 					input.style.fontSize = label.value+'px';
+					document.getElementById('font').innerHTML = label.value+'px';
 					break;
 				default:
 					null;
@@ -160,6 +170,7 @@ const bottomUtilities = ()=>{
 }
 bottomUtilities();
 
+// settar as novas libs
 const setLibs = ()=>{
 
 	const jsLibLabel0 = document.querySelector('#jsLib0');
@@ -183,6 +194,7 @@ const setLibs = ()=>{
 }
 setLibs();
 
+// ativar as configurações e tema
 const setConfig = ()=>{
 
 	const body = document.getElementById('body');
@@ -223,4 +235,5 @@ const onOpenConsole = ()=>{
 }
 onOpenConsole();
 
+// checar o tempo de inicialização da aplicação
 document.getElementById('startTime').innerHTML = performance.now();

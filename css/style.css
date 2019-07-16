@@ -46,8 +46,12 @@ textarea::-webkit-scrollbar-thumb{
 }
 .footer-label{
 	margin-top: 17px;
+	font-size: 17px;
 	width: 35px;
-	height: 13px;
+	height: 17px;
+	background-color: #ffffff00;
+	color: #fff;
+	border-style: none;
 }
 .separator{
 	margin-top: 15px;
