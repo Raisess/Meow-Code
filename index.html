@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name='author' content="Danilo Santana">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="./icon/favicon.ico">
+	<!--icons-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
+  <!--||-->
+  <!--fonts-->
+  <link id="newFont" href="" rel="stylesheet">
+  <!--||-->
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<!--aditional libs-->
+  <link id="cssLibLocation0" rel="stylesheet" href="">
+  <script id="jsLibLocation0" src=""></script>
+  <link id="cssLibLocation1" rel="stylesheet" href="">
+  <script id="jsLibLocation1" src=""></script>
+  <!--||-->
+	<title id='title'>Meow Code </title>
+</head>
+<body id="body" style="margin: 0; position: fixed; font-family: sans-serif;	width: 100%; height: 100%; font-size: 17px;">
+	<div class="app">
+		<div class="side-menu" id="sideMenu">
+			<div class="open-libs" id="openLibs" title="adicionar libs">
+				<i class="fas fa-file-archive"></i>
+			</div>
+			<div class="export-file" title="exportar projeto" onclick="exportFile()">
+				<i class="fas fa-truck"></i>
+			</div>
+			<div class="open-config" id="openConfig" title="configurações">
+				<i class="fas fa-cog"></i>
+			</div>
+		</div>
+		<div class="new-window">
+			<div class="libs-window" id="libsWindow" style="display: none;">
+				<input style="width: 95%; height: 20px; border-style: none;" type="text" id="jsLib0" placeholder="js lib 0" />
+				<input style="width: 95%; height: 20px; border-style: none;" type="text" id="cssLib0" placeholder="css lib 0" />
+				<input style="width: 95%; height: 20px; border-style: none;" type="text" id="jsLib1" placeholder="js lib 1" />
+				<input style="width: 95%; height: 20px; border-style: none;" type="text" id="cssLib1" placeholder="css lib 1" />
+				<button style="width: 80%; height: 30px; border-style: none; margin-left: 8%; border-radius: 5px; font-size: 20px; cursor: pointer;" id="setLibs">set libs</button>
+			</div>
+			<div class="config-window" id="configWindow" style="display: none;">
+				<div class="config-container" id='configContainer'>
+					<div class="system-container">
+						<h4>Sistema</h4>
+						<div>
+							<p>Tempo de inicialização: <b id="startTime"></b>ms</p>
+						</div>
+					</div>
+					<hr />
+					<div class="ide-container">
+						<h4>IDE</h4>
+						<div>
+							<p>Tema atual: <b id="currentTheme"></b></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main">
+			<div class="debug-window">
+				<div class="inputs">
+					<textarea
+						id="input"
+						wrap="soft"
+						class="debug-input"
+						type="text"
+						placeholder=">"
+					></textarea>
+				</div>
+				<div class="debug-output" id="output">
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="content">
+				<p class="clock" id="clock"></p>
+				<p class="separator">|</p>
+				<p class="theme" id="theme">theme: </p>
+				<p class="separator">|</p>
+				<p>font-size:</p>
+				<input type="number" class="footer-label" id="fontSize" value="17" />
+				<div class="container" style="display: flex; position: fixed; right: 10px;">
+					<p style="color: #fff;">><b style="text-decoration: underline; color: yellow">Ctrl+Shift+I</b></p>
+					<p style="color: #fff;">&nbsp;para abrir o console!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		const fs = require('fs');
+
+		function exportFile(){
+
+			fs.writeFile("./build/index.html", document.getElementById('input').value, (error)=>{
+
+				if(error){
+					throw error;
+				}
+
+				console.log('projeto exportado');
+				alert('projeto exportado');
+
+			});
+		}
+	</script>
+	<script src="./theme.js"></script>
+	<script src="./js/snippets.js"></script>
+	<script src="./js/index.js"></script>
+</body>
+</html>
