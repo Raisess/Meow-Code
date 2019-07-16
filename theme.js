@@ -1,25 +1,25 @@
-const themeName = 'dark neon';
+const themeName = 'default theme';
 
 const config = {
 	background: {
-		color: '#202538',
+		color: '#361f47',
 		fontColor: '#fff'
 	},
 	code: {
-		fontColor: '#eb2d4c',
+		fontColor: '#2dc41f',
 		fontSize: '17px',
-		fontImportLink: 'https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap',
-		fontFamily: 'Roboto Mono, monospace'
+		fontImportLink: '',
+		fontFamily: ''
 	},
 	sideMenu: {
-		color: '#191B2B',
-		iconsColor: '#eee'
+		color: '#5a3678',
+		iconsColor: '#fff'
 	},
 	libsWindow: {
-		color: '#191C2B',
-		fontColor: '#111'
+		color: '#7842a1',
+		fontColor: '#000'
 	},
 	configWindow: {
-		color: '#191C2B'	
+		color: '#7842a1'	
 	}
 };
