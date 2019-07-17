@@ -42,6 +42,7 @@ font-family: sans-serif;
 <div id="root">
 </div>
 <script>
+
 </script>
 </body>
 </html>`,

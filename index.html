@@ -28,11 +28,11 @@
 				<div class="open-libs" id="openLibs" title="adicionar libs">
 					<i class="fas fa-file-archive"></i>
 				</div>
-				<div class="import-file" title="importar projeto" id="importFile">
-					<i class="fas fa-file-alt"></i>
+				<div class="import-file" title="abrir arquivo" id="importFile">
+					<i class="fas fa-folder-open"></i>
 				</div>
-				<div class="export-file" title="exportar projeto" id="exportFile">
-					<i class="fas fa-truck"></i>
+				<div class="export-file" title="salvar arquivo" id="exportFile">
+					<i class="fas fa-save"></i>
 				</div>
 				<div class="open-config" id="openConfig" title="configurações">
 					<i class="fas fa-cog"></i>
@@ -83,7 +83,7 @@
 						placeholder=">"
 					></textarea>
 				</div>
-				<div class="debug-output" id="output">
+				<div class="debug-output" id="output" style="display: none;">
 				</div>
 			</div>
 		</div>
@@ -94,7 +94,9 @@
 				<p class="theme" id="theme">theme: </p>
 				<p class="separator">|</p>
 				<p>font-size:</p>
-				<input type="number" class="footer-label" id="fontSize" value="17" />
+				<input type="number" class="footer-label" id="fontSize" value="16" />
+				<p class="separator">|</p>
+				<button id="onOff" class="bottom-btn">html preview off</button>
 				<p class="separator">|</p>
 				<b style="margin-top: -1px;"><p id="event" style="color: orange; text-decoration: underline;"></p></b>
 				<div class="contain" style="display: flex; position: fixed; right: 10px;">
@@ -107,6 +109,14 @@
 	<script>
 		// exportar o projeto
 		const fs = require('fs');
+
+		var n;
+
+		function reset(){
+			setTimeout(() => {
+		    document.getElementById('event').innerHTML = '';
+		  }, 1000);
+		}
 
 		document.getElementById('archiveNameExport').addEventListener('keydown', (keydown) => {
 		  switch (keydown.keyCode) {
@@ -128,17 +138,6 @@
 		  		break;
 		  }
 		});
-		document.addEventListener('keydown', (keydown) => {
-			switch (keydown.keyCode) {
-				case 27: // ESC
-		  		document.getElementById('archiveWindow').style.display = 'none';
-		  		document.getElementById('importWindow').style.display = 'none';
-		  		break;
-		  	default:
-		  		null;
-		  		break;
-			}
-		});
 
 		// salvar e criar arquivo
 		function exportFile(){
@@ -146,7 +145,7 @@
 			// nome do arquivo
 			let name = document.getElementById('archiveNameExport');
 			// escrever
-			fs.writeFile('./build/'+name.value+'.html', document.getElementById('input').value, (error)=>{
+			fs.writeFile('./build/'+name.value, document.getElementById('input').value, (error)=>{
 
 				if(error){
 					throw error;
@@ -155,7 +154,8 @@
 			});
 
 			document.getElementById('archiveWindow').style.display = 'none';
-			document.getElementById('event').innerHTML = name.value+'.html salvo!';
+			document.getElementById('event').innerHTML = name.value+' salvo!';
+			reset();
 			name.value = '';
 		}
 		// importar a arquivo
@@ -163,28 +163,42 @@
 
 			let name = document.getElementById('archiveNameImport');
 
-			fs.readFile("./build/"+name.value+".html", (error, content)=>{
+			fs.readFile("./build/"+name.value, (error, content)=>{
 
 				if(error){
 					throw error;
 				}
-				console.log('arquivo importado: '+name.value+'.html');
 				document.getElementById('input').value = content;
 			});
-
+			console.log('arquivo importado: '+name.value);
 			document.getElementById('importWindow').style.display = 'none';
-			document.getElementById('event').innerHTML = 'arquivo importado: '+name.value+'.html';
+			document.getElementById('event').innerHTML = 'arquivo importado: '+name.value;
+			reset();
+			n = name.value;
 			name.value = '';
+			console.log(n);
 		}
 
-		// ler projeto
-		fs.readFile("./build/index.html", (error, content)=>{
-
-			if(error){
-				throw error;
+		document.addEventListener('keydown', (keydown) => {
+			switch (keydown.keyCode) {
+				case 27: // ESC
+		  		document.getElementById('archiveWindow').style.display = 'none';
+		  		document.getElementById('importWindow').style.display = 'none';
+		  		break;
+		  	case 117: // F6 para salvar o arquivo aberto no momento
+		  		fs.writeFile('./build/'+n, document.getElementById('input').value, (error)=>{
+		  			if(error){
+		  				throw error;
+		  			}
+		  			document.getElementById('event').innerHTML = 'arquivo salvo: '+n;
+		  			reset();
+		  			console.log('arquivo salvo:', n);
+		  		});
+		  		break;
+		  	default:
+		  		null;
+		  		break;
 			}
-
-			document.getElementById('input').value = content;
 		});
 	</script>
 	<script src="./theme.js"></script>

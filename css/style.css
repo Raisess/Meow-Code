@@ -89,7 +89,7 @@ textarea::-webkit-scrollbar-thumb{
 	height: 99.1%;
 }
 .debug-input{
-	width: 48.15%;
+	width: 100.5%;
 	height: 100%;
 	text-align: left;
 	resize: none;
@@ -178,4 +178,12 @@ textarea::-webkit-scrollbar-thumb{
 	font-size: 20px;
 	color: #fff;
 	border-radius: 5px;
+}
+
+.bottom-btn{
+	height: 20px;
+	border-style: none;
+	margin-top: 17px;
+	background-color: #111;
+	color: #00ff00;
 }

@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.1.0';
+const version = '0.1.2';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -218,6 +218,33 @@ const openImportArchive = ()=>{
 	});
 }
 openImportArchive();
+
+const openPreviewWindow = ()=>{
+
+	const onOff = document.getElementById('onOff');
+	const html = document.getElementById('output');
+
+	const code = document.getElementById('input');
+
+	function open(){
+		onOff.addEventListener('click', () => {
+		  html.style.display = '';
+		  code.style.width = '48.15%';
+		  onOff.innerHTML = 'html preview on';
+		  close();
+		});
+	}
+	function close(){
+		onOff.addEventListener('click', () => {
+		  html.style.display = 'none';
+		  code.style.width = '100.5%';
+		  onOff.innerHTML = 'html preview off';
+		  open();
+		});
+	}
+	open();
+}
+openPreviewWindow();
 
 // ativar as configurações e tema
 const setConfig = ()=>{

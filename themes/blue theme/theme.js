@@ -7,7 +7,7 @@ const config = {
 	},
 	code: {
 		fontColor: '#8599ed',
-		fontSize: '17px',
+		fontSize: '16px',
 		fontImportLink: 'https://fonts.googleapis.com/css?family=Muli&display=swap',
 		fontFamily: 'Muli, sans-serif'
 	},
