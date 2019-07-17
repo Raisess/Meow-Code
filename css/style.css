@@ -5,7 +5,7 @@ textarea::-webkit-scrollbar-track{
 	background-color: #ffffff00;
 }
 textarea::-webkit-scrollbar-thumb{
-	background-color: gray;
+	background-color: #eee;
 	border-radius: 10px;
 }
 
@@ -126,7 +126,9 @@ textarea::-webkit-scrollbar-thumb{
 .libs-window input{
 	width: 95%;
 	height: 20px;
-	border-style: none;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #333;
 }
 .libs-window button{
 	width: 80%;
@@ -167,6 +169,7 @@ textarea::-webkit-scrollbar-thumb{
 	height: 60px;
 	border-radius: 10px;
 	margin-left: 38%;
+	box-shadow: 0 0 3px #eee;
 }
 .archive-window input{
 	width: 88.7%;

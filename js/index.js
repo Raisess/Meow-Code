@@ -1,11 +1,11 @@
 /*
 * @author Danilo Santana
-*	Uma IDE HTML5, CSS3 para ajudar no ensino dessas tecnologias
+*	Um editor de código para ajudar no ensino dessas tecnologias
 */
 // Meow Code
 
 // versão do código
-const version = '0.1.2';
+const version = '0.1.3';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -197,6 +197,7 @@ const setLibs = ()=>{
 }
 setLibs();
 
+// janela para salvar arquivo
 const setArchiveName = ()=>{
 
 	const exportFileBtn = document.getElementById('exportFile');
@@ -208,6 +209,7 @@ const setArchiveName = ()=>{
 }
 setArchiveName();
 
+// janela para abrir arquivo
 const openImportArchive = ()=>{
 
 	const importWindow = document.getElementById('importWindow');
@@ -219,6 +221,7 @@ const openImportArchive = ()=>{
 }
 openImportArchive();
 
+// abrir a janela de prévia para HTML
 const openPreviewWindow = ()=>{
 
 	const onOff = document.getElementById('onOff');
@@ -283,8 +286,10 @@ const setConfig = ()=>{
 	configContainer.style.color = config.background.fontColor;
 	windowExport.style.backgroundColor = config.sideMenu.color;
 	windowExportLabel.style.backgroundColor = config.background.color;
+	windowExportLabel.style.color = config.background.fontColor;
 	windowImport.style.backgroundColor = config.sideMenu.color;
 	windowImportLabel.style.backgroundColor = config.background.color;
+	windowImportLabel.style.color = config.background.fontColor;
 
 	importFont.href = config.code.fontImportLink;
 }
