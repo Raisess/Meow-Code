@@ -26,7 +26,7 @@
 		<div class="side-menu" id="sideMenu">
 			<div class="box">
 				<div class="open-libs" id="openLibs" title="adicionar libs">
-					<i class="fas fa-file-archive"></i>
+					<i class="fas fa-file-code"></i>
 				</div>
 				<div class="import-file" title="abrir arquivo" id="importFile">
 					<i class="fas fa-folder-open"></i>
@@ -34,6 +34,12 @@
 				<div class="export-file" title="salvar arquivo" id="exportFile">
 					<i class="fas fa-save"></i>
 				</div>
+        <div class="downloads" title="baixe novos temas" id="download">
+					<i class="fas fa-cloud-download-alt"></i>
+        </div>
+        <div class="git" title="gitHub" id="git">
+        	<i class="fab fa-github-alt"></i>
+        </div>
 				<div class="open-config" id="openConfig" title="configurações">
 					<i class="fas fa-cog"></i>
 				</div>
@@ -107,100 +113,8 @@
 		</div>
 	</div>
 	<script>
-		// exportar o projeto
+		// modulos node
 		const fs = require('fs');
-
-		var n;
-
-		function reset(){
-			setTimeout(() => {
-		    document.getElementById('event').innerHTML = '';
-		  }, 1000);
-		}
-
-		document.getElementById('archiveNameExport').addEventListener('keydown', (keydown) => {
-		  switch (keydown.keyCode) {
-		  	case 13: // ENTER
-		  		exportFile();
-		  		break;
-		  	default:
-		  		null;
-		  		break;
-		  }
-		});
-		document.getElementById('archiveNameImport').addEventListener('keydown', (keydown) => {
-		  switch (keydown.keyCode) {
-		  	case 13: // ENTER
-		  		importFile();
-		  		break;
-		  	default:
-		  		null;
-		  		break;
-		  }
-		});
-
-		// salvar e criar arquivo
-		function exportFile(){
-
-			// nome do arquivo
-			let name = document.getElementById('archiveNameExport');
-			// escrever
-			fs.writeFile('./build/'+name.value, document.getElementById('input').value, (error)=>{
-
-				if(error){
-					throw error;
-				}
-				console.log('projeto salvo');
-			});
-
-			document.getElementById('archiveWindow').style.display = 'none';
-			document.getElementById('event').innerHTML = name.value+' salvo!';
-			reset();
-			n = name.value;
-			name.value = '';
-		}
-		// importar a arquivo
-		function importFile(){
-
-			let name = document.getElementById('archiveNameImport');
-
-			fs.readFile("./build/"+name.value, (error, content)=>{
-
-				if(error){
-					throw error;
-				}
-				document.getElementById('input').value = content;
-			});
-			console.log('arquivo importado: '+name.value);
-			document.getElementById('importWindow').style.display = 'none';
-			document.getElementById('event').innerHTML = 'arquivo importado: '+name.value;
-			reset();
-			n = name.value;
-			name.value = '';
-			console.log(n);
-		}
-
-		document.addEventListener('keydown', (keydown) => {
-			switch (keydown.keyCode) {
-				case 27: // ESC
-		  		document.getElementById('archiveWindow').style.display = 'none';
-		  		document.getElementById('importWindow').style.display = 'none';
-		  		break;
-		  	case 117: // F6 para salvar o arquivo aberto no momento
-		  		fs.writeFile('./build/'+n, document.getElementById('input').value, (error)=>{
-		  			if(error){
-		  				throw error;
-		  			}
-		  			document.getElementById('event').innerHTML = 'arquivo salvo: '+n;
-		  			reset();
-		  			console.log('arquivo salvo:', n);
-		  		});
-		  		break;
-		  	default:
-		  		null;
-		  		break;
-			}
-		});
 	</script>
 	<script src="./theme.js"></script>
 	<script src="./js/snippets.js"></script>

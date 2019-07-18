@@ -249,6 +249,102 @@ const openPreviewWindow = ()=>{
 }
 openPreviewWindow();
 
+const fileSystem = ()=>{
+	
+	var n;
+
+	function reset(){
+		setTimeout(() => {
+	    document.getElementById('event').innerHTML = '';
+	  }, 1000);
+	}
+
+	document.getElementById('archiveNameExport').addEventListener('keydown', (keydown) => {
+	  switch (keydown.keyCode) {
+	  	case 13: // ENTER
+	  		exportFile();
+	  		break;
+	  	default:
+	  		null;
+	  		break;
+	  }
+	});
+	document.getElementById('archiveNameImport').addEventListener('keydown', (keydown) => {
+	  switch (keydown.keyCode) {
+	  	case 13: // ENTER
+	  		importFile();
+	  		break;
+	  	default:
+	  		null;
+	  		break;
+	  }
+	});
+
+	// salvar e criar arquivo
+	function exportFile(){
+
+		// nome do arquivo
+		let name = document.getElementById('archiveNameExport');
+		// escrever
+		fs.writeFile('./build/'+name.value, document.getElementById('input').value, (error)=>{
+
+			if(error){
+				throw error;
+			}
+			console.log('projeto salvo');
+		});
+
+		document.getElementById('archiveWindow').style.display = 'none';
+		document.getElementById('event').innerHTML = name.value+' salvo!';
+		reset();
+		n = name.value;
+		name.value = '';
+	}
+	// importar a arquivo
+	function importFile(){
+
+		let name = document.getElementById('archiveNameImport');
+
+		fs.readFile("./build/"+name.value, (error, content)=>{
+
+			if(error){
+				throw error;
+			}
+			document.getElementById('input').value = content;
+		});
+		console.log('arquivo importado: '+name.value);
+		document.getElementById('importWindow').style.display = 'none';
+		document.getElementById('event').innerHTML = 'arquivo importado: '+name.value;
+		reset();
+		n = name.value;
+		name.value = '';
+		console.log(n);
+	}
+
+	document.addEventListener('keydown', (keydown) => {
+		switch (keydown.keyCode) {
+			case 27: // ESC
+	  		document.getElementById('archiveWindow').style.display = 'none';
+	  		document.getElementById('importWindow').style.display = 'none';
+	  		break;
+	  	case 117: // F6 para salvar o arquivo aberto no momento
+	  		fs.writeFile('./build/'+n, document.getElementById('input').value, (error)=>{
+	  			if(error){
+	  				throw error;
+	  			}
+	  			document.getElementById('event').innerHTML = 'arquivo salvo: '+n;
+	  			reset();
+	  			console.log('arquivo salvo:', n);
+	  		});
+	  		break;
+	  	default:
+	  		null;
+	  		break;
+		}
+	});
+}
+fileSystem();
+
 // ativar as configurações e tema
 const setConfig = ()=>{
 
@@ -294,6 +390,27 @@ const setConfig = ()=>{
 	importFont.href = config.code.fontImportLink;
 }
 setConfig();
+
+const downloads = ()=>{
+
+	const cloudBtn = document.getElementById('download');
+	
+	cloudBtn.addEventListener('click', () => {
+	  window.open('https://meowcode.netlify.com/');
+	});
+
+}
+downloads();
+
+const gitHub = ()=>{
+
+	const btn = document.getElementById('git');
+
+	btn.addEventListener('click', () => {
+	  window.open('https://github.com');
+	});
+}
+gitHub();
 
 const onOpenConsole = ()=>{
 	console.log('%cpara usar o JavaScript clique no icone do olho ali em cima para usar as live expressions', 'font-size: 20px; color: orange;');

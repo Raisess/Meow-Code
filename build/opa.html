@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>testando kskskk</title>
+<style>
+body{
+margin: 0;
+font-family: sans-serif;
+}
+.main-box{
+width: 300px;
+height: 350px;
+background-color: #333;
+}
+.container{
+width: 300px;
+height: 350px;
+background-color: red;
+margin-top: -20px;
+clip-path: circle(30% at 100% 100%);
+cursor: pointer;
+}
+.inner{
+width: 300px;
+height: 350px;
+background-color: blue;
+clip-path: circle(30% at 0 0);
+cursor: pointer;
+}
+.inner:hover{
+transition: 2s;
+clip-path: circle(100%);
+background-color: orange;
+color: #fff;
+}
+.container:hover{
+transition: 2s;
+clip-path: circle(100%);
+background-color: purple;
+}
+</style>
+</head>
+<body>
+<div class="main">
+<div class="main-box">
+<div class="container">
+<div class="inner">
+<h3>opa</h3>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
