@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.1.3';
+const version = '0.1.4';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -249,10 +249,11 @@ const openPreviewWindow = ()=>{
 }
 openPreviewWindow();
 
+// sistema de arquivos
 const fileSystem = ()=>{
 	
 	var n;
-
+	// resetar a mensagem
 	function reset(){
 		setTimeout(() => {
 	    document.getElementById('event').innerHTML = '';
@@ -419,3 +420,4 @@ onOpenConsole();
 
 // checar o tempo de inicialização da aplicação
 document.getElementById('startTime').innerHTML = performance.now();
+console.log(performance.now());
