@@ -7,7 +7,7 @@ const config = {
 	},
 	code: {
 		fontColor: '#09c8e6',
-		fontSize: '16px',
+		fontSize: '16',
 		fontImportLink: 'https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap',
 		fontFamily: 'Roboto Mono, monospace'
 	},

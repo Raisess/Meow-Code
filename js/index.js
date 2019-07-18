@@ -1,11 +1,11 @@
 /*
 * @author Danilo Santana
-*	Um editor de código para ajudar no ensino dessas tecnologias
+*	Um editor de código para ajudar no ensino da programação
 */
 // Meow Code
 
 // versão do código
-const version = '0.1.4';
+const version = '0.1.5';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -159,7 +159,9 @@ const bottomUtilities = ()=>{
 		const label = document.getElementById('fontSize');
 		let input = document.getElementById('input');
 
-		document.getElementById('font').innerHTML = config.code.fontSize;
+		label.value = config.code.fontSize;
+
+		document.getElementById('font').innerHTML = config.code.fontSize+'px';
 
 		label.addEventListener('blur', () => {
 
@@ -257,7 +259,7 @@ const fileSystem = ()=>{
 	function reset(){
 		setTimeout(() => {
 	    document.getElementById('event').innerHTML = '';
-	  }, 1000);
+	  }, 2000);
 	}
 
 	document.getElementById('archiveNameExport').addEventListener('keydown', (keydown) => {
@@ -371,7 +373,7 @@ const setConfig = ()=>{
 	body.style.color = config.background.fontColor;
 	input.style.backgroundColor = config.background.color;
 	input.style.color = config.code.fontColor;
-	input.style.fontSize = config.code.fontSize;
+	input.style.fontSize = config.code.fontSize+'px';
 	input.style.fontFamily = config.code.fontFamily;
 	sideMenu.style.backgroundColor = config.sideMenu.color;
 	sideMenu.style.color = config.sideMenu.iconsColor;
@@ -389,6 +391,24 @@ const setConfig = ()=>{
 	windowImportLabel.style.color = config.background.fontColor;
 
 	importFont.href = config.code.fontImportLink;
+
+	function sideMenuIconAnimation(){
+
+		let icons = ['0', '1', '2', '3', '4', '5'];
+
+		for(let a = 0; a < icons.length; a++){
+			document.querySelector('.icon'+icons[a]).addEventListener('mouseover', () => {
+                          document.querySelector('.icon'+icons[a]).style.transition = '0.5s';
+			  document.querySelector('.icon'+icons[a]).style.color = config.code.fontColor;
+			});
+			document.querySelector('.icon'+icons[a]).addEventListener('mouseout', () => {
+                          document.querySelector('.icon'+icons[a]).style.transition = '0.5s';
+			  document.querySelector('.icon'+icons[a]).style.color = config.sideMenu.iconsColor;
+			});
+		}
+	}
+	sideMenuIconAnimation();
+
 }
 setConfig();
 

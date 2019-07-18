@@ -1,9 +1,6 @@
-// Modules to control application life and create native browser window
 const {app, BrowserWindow, Menu, Tray} = require('electron');
 const path = require('path');
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
 //Menu.setApplicationMenu();
@@ -12,7 +9,6 @@ function createWindow () {
 
   const appIcon = new Tray('./icon/favicon.ico');
 
-  // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1300,
     height: 760,
@@ -24,7 +20,7 @@ function createWindow () {
     icon: './icon/favicon.ico'
   });
 
-  // and load the index.html of the app.
+
   mainWindow.setFullScreen(false);
   mainWindow.loadFile('index.html');
 
@@ -33,9 +29,6 @@ function createWindow () {
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null;
   });
 }
@@ -59,6 +52,3 @@ app.on('activate', function () {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.

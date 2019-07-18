@@ -1,4 +1,4 @@
-const themeName = 'null';      // nome do tema
+const themeName = 'gold code';      // nome do tema
 
 const config = {
 	background: {

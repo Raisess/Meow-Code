@@ -7,7 +7,7 @@ const config = {
 	},
 	code: {
 		fontColor: '#2dc41f',
-		fontSize: '17px',
+		fontSize: '16',
 		fontImportLink: 'https://fonts.googleapis.com/css?family=Ubuntu&display=swap',
 		fontFamily: 'Ubuntu, sans-serif'
 	},

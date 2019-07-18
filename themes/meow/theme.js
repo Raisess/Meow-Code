@@ -7,7 +7,7 @@ const config = {
 	},
 	code: {
 		fontColor: '#ed5fd7',
-		fontSize: '16px',
+		fontSize: '16',
 		fontImportLink: 'https://fonts.googleapis.com/css?family=Fredoka+One&display=swap',
 		fontFamily: 'Fredoka One, cursive'
 	},
