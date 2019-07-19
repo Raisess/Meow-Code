@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.1.7';
+const version = '0.1.8';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -258,7 +258,12 @@ openPreviewWindow();
 // sistema de arquivos
 const fileSystem = ()=>{
 	
-	var n;
+	let n; // nome do arquivo na memória
+	let openArchives = []; // espaço na memória para arquivos abertos
+	let g = []; // espaço na memória para o dom dos arquivos abertos
+	let x = -1;
+	let o = 0;
+
 	// resetar a mensagem
 	function reset(){
 		setTimeout(() => {
@@ -280,6 +285,7 @@ const fileSystem = ()=>{
 	  switch (keydown.keyCode) {
 	  	case 13: // ENTER
 	  		importFile();
+	  		saveOpenArchivesNames(n);
 	  		break;
 	  	default:
 	  		null;
@@ -326,6 +332,36 @@ const fileSystem = ()=>{
 		n = name.value;
 		name.value = '';
 		console.log(n);
+
+	}
+
+	// settar o nome do arquivo como valor do input de abertura de arquivos
+	function setArchiveNameValue(value){
+		document.getElementById('archiveNameImport').value = value;
+	}
+
+	// salvar os arquivos abertos no historico
+	const saveOpenArchivesNames = (a)=>{
+
+		const openedArchives = document.getElementById('openedArchives');
+
+		openArchives.push(a);
+
+		for(o >= 0; o < openArchives.length; o++){
+			openedArchives.innerHTML += `<p id="arc${o}">${openArchives[o]}</p><hr class="line" />`;
+		}
+
+		x+=1;
+		g.push(String(x));
+
+		for(let i = 0; i < openArchives.length; i++){
+			document.querySelector('#arc'+g[i]).addEventListener('click', () => {
+		  	setArchiveNameValue(openArchives[i]);
+			});
+		}
+
+		console.log(openArchives.toString());
+
 	}
 
 	document.addEventListener('keydown', (keydown) => {
@@ -349,6 +385,7 @@ const fileSystem = ()=>{
 	  		break;
 		}
 	});
+
 }
 fileSystem();
 

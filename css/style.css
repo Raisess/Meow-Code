@@ -161,12 +161,22 @@ textarea::-webkit-scrollbar-thumb{
 	margin-left: 0px;
 }
 
-.archive-window{
+.archive-window-export{
 	position: fixed;
 	top: 20px;
 	z-index: 1;
 	width: 500px;
 	height: 60px;
+	border-radius: 10px;
+	margin-left: 33%;
+	box-shadow: 0 0 3px #eee;
+}
+.archive-window-import{
+	position: fixed;
+	top: 20px;
+	z-index: 1;
+	width: 500px;
+	height: 200px;
 	border-radius: 10px;
 	margin-left: 33%;
 	box-shadow: 0 0 3px #eee;
@@ -198,8 +208,38 @@ textarea::-webkit-scrollbar-thumb{
 	right: 0;
 	height: 95.8%;
 	width: 9.5%;
-	font-size: 7px;
+	font-size: 5px;
 	padding-right: -30px;
 	border-style: none;
 	resize: none;
+	font-family: sans-serif;
+  cursor: pointer;
+}
+
+.opened-archives{
+	width: 450px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 130px;
+	overflow: auto;
+}
+.opened-archives::-webkit-scrollbar{
+	width: 10px;
+}
+.opened-archives::-webkit-scrollbar-track{
+	background-color: #555555aa;
+}
+.opened-archives::-webkit-scrollbar-thumb{
+	background-color: #111;
+	border-style: solid;
+	border-color: #ddd;
+	border-width: 1px;
+}
+
+.opened-archives p{
+	cursor: pointer;
+}
+.line{
+	width: 98.5%;
+	margin-left: -3%;
 }
