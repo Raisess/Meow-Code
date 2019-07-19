@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.1.5';
+const version = '0.1.6';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -229,12 +229,15 @@ const openPreviewWindow = ()=>{
 	const onOff = document.getElementById('onOff');
 	const html = document.getElementById('output');
 
+	let sideMap = document.getElementById('sideMap');
+
 	const code = document.getElementById('input');
 
 	function open(){
 		onOff.addEventListener('click', () => {
 		  html.style.display = '';
-		  code.style.width = '48.15%';
+		  sideMap.style.display = 'none';
+		  code.style.width = '55.9%';
 		  onOff.innerHTML = 'html preview on';
 		  close();
 		});
@@ -242,6 +245,7 @@ const openPreviewWindow = ()=>{
 	function close(){
 		onOff.addEventListener('click', () => {
 		  html.style.display = 'none';
+		  sideMap.style.display = '';
 		  code.style.width = '100.5%';
 		  onOff.innerHTML = 'html preview off';
 		  open();
@@ -348,6 +352,18 @@ const fileSystem = ()=>{
 }
 fileSystem();
 
+const sideMapOutput = ()=>{
+
+	const sideMap = document.getElementById('sideMap');
+	const input = document.getElementById('input');
+
+	setInterval(() => {
+	  sideMap.innerHTML = String(input.value);
+	}, 1);
+
+}
+sideMapOutput();
+
 // ativar as configurações e tema
 const setConfig = ()=>{
 
@@ -362,6 +378,7 @@ const setConfig = ()=>{
 	let windowExportLabel = document.getElementById('archiveNameExport');
 	const windowImport = document.getElementById('importWindow');
 	let windowImportLabel = document.getElementById('archiveNameImport');
+	let sideMap = document.getElementById('sideMap');
 
 	let importFont = document.getElementById('newFont');
 
@@ -389,20 +406,23 @@ const setConfig = ()=>{
 	windowImport.style.backgroundColor = config.sideMenu.color;
 	windowImportLabel.style.backgroundColor = config.background.color;
 	windowImportLabel.style.color = config.background.fontColor;
+	sideMap.style.backgroundColor = config.sideMenu.color;
+	sideMap.style.color = config.code.fontColor;
 
 	importFont.href = config.code.fontImportLink;
 
 	function sideMenuIconAnimation(){
 
 		let icons = ['0', '1', '2', '3', '4', '5'];
+    let transitionTime = '0.3s';
 
 		for(let a = 0; a < icons.length; a++){
 			document.querySelector('.icon'+icons[a]).addEventListener('mouseover', () => {
-                          document.querySelector('.icon'+icons[a]).style.transition = '0.5s';
+        document.querySelector('.icon'+icons[a]).style.transition = transitionTime;
 			  document.querySelector('.icon'+icons[a]).style.color = config.code.fontColor;
 			});
 			document.querySelector('.icon'+icons[a]).addEventListener('mouseout', () => {
-                          document.querySelector('.icon'+icons[a]).style.transition = '0.5s';
+        document.querySelector('.icon'+icons[a]).style.transition = transitionTime;
 			  document.querySelector('.icon'+icons[a]).style.color = config.sideMenu.iconsColor;
 			});
 		}

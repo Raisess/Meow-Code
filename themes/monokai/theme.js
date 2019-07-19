@@ -8,8 +8,8 @@ const config = {
 	code: {
 		fontColor: '#09c8e6',
 		fontSize: '16',
-		fontImportLink: 'https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap',
-		fontFamily: 'Roboto Mono, monospace'
+		fontImportLink: 'https://fonts.googleapis.com/css?family=Open+Sans&display=swap',
+		fontFamily: 'Open Sans, sans-serif'
 	},
 	sideMenu: {
 		color: '#222',
