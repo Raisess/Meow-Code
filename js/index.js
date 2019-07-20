@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.1.8';
+const version = '0.1.9';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -190,10 +190,10 @@ const setLibs = ()=>{
 	  document.getElementById('cssLibLocation0').href = cssLibLabel0.value;
 	  document.getElementById('jsLibLocation1').src = jsLibLabel1.value;
 	  document.getElementById('cssLibLocation1').href = cssLibLabel1.value;
-	  console.log('js lib 0 setted to:', jsLibLabel0.value);
-	  console.log('css lib 0 setted to:', cssLibLabel0.value);
-	  console.log('js lib 1 setted to:', jsLibLabel1.value);
-	  console.log('css lib 1 setted to:', cssLibLabel1.value);
+	  //console.log('js lib 0 setted to:', jsLibLabel0.value);
+	  //console.log('css lib 0 setted to:', cssLibLabel0.value);
+	  //console.log('js lib 1 setted to:', jsLibLabel1.value);
+	  //console.log('css lib 1 setted to:', cssLibLabel1.value);
 	});
 
 }
@@ -264,6 +264,7 @@ const fileSystem = ()=>{
 	let x = -1;
 	let o = 0;
 
+
 	// resetar a mensagem
 	function reset(){
 		setTimeout(() => {
@@ -304,7 +305,7 @@ const fileSystem = ()=>{
 			if(error){
 				throw error;
 			}
-			console.log('projeto salvo');
+			//console.log('projeto salvo');
 		});
 
 		document.getElementById('archiveWindow').style.display = 'none';
@@ -325,19 +326,24 @@ const fileSystem = ()=>{
 			}
 			document.getElementById('input').value = content;
 		});
-		console.log('arquivo importado: '+name.value);
+
+		//console.log('arquivo importado: '+name.value);
+
 		document.getElementById('importWindow').style.display = 'none';
 		document.getElementById('event').innerHTML = 'arquivo importado: '+name.value;
 		reset();
 		n = name.value;
 		name.value = '';
-		console.log(n);
+
+		//console.log(n);
+
+		return n;
 
 	}
 
 	// settar o nome do arquivo como valor do input de abertura de arquivos
-	function setArchiveNameValue(value){
-		document.getElementById('archiveNameImport').value = value;
+	function setArchiveNameValue(v){
+		document.getElementById('archiveNameImport').value = v;
 	}
 
 	// salvar os arquivos abertos no historico
@@ -348,7 +354,12 @@ const fileSystem = ()=>{
 		openArchives.push(a);
 
 		for(o >= 0; o < openArchives.length; o++){
-			openedArchives.innerHTML += `<p id="arc${o}">${openArchives[o]}</p><hr class="line" />`;
+			openedArchives.innerHTML += `
+				<div class="archive-box" id="archive${o}">
+					<p id="arc${o}">${openArchives[o]}</p>
+				</div>
+				<hr id="line${o}" class="line" />
+			`;
 		}
 
 		x+=1;
@@ -360,7 +371,21 @@ const fileSystem = ()=>{
 			});
 		}
 
-		console.log(openArchives.toString());
+		document.getElementById('clear').addEventListener('click', () => {
+		  
+		  document.getElementById('openedArchives').innerHTML = '<p style="text-align: center;">historico limpo</p>';
+
+		  setTimeout(() => {
+		    document.getElementById('openedArchives').innerHTML = '';
+		  }, 1000);
+
+		  openArchives = [];
+		  //console.log(openArchives.toString());
+		  x = -1;
+		  o = 0;
+		});
+
+		//console.log(openArchives.toString());
 
 	}
 
@@ -377,7 +402,8 @@ const fileSystem = ()=>{
 	  			}
 	  			document.getElementById('event').innerHTML = 'arquivo salvo: '+n;
 	  			reset();
-	  			console.log('arquivo salvo:', n);
+
+	  			//console.log('arquivo salvo:', n);
 	  		});
 	  		break;
 	  	default:
@@ -395,7 +421,7 @@ const sideMapOutput = ()=>{
 	const input = document.getElementById('input');
 
 	setInterval(() => {
-	  sideMap.innerHTML = String(input.value);
+	  sideMap.value = String(input.value);
 	}, 1);
 
 }
@@ -445,13 +471,30 @@ const setConfig = ()=>{
 	windowImportLabel.style.color = config.background.fontColor;
 	sideMap.style.backgroundColor = config.sideMenu.color;
 	sideMap.style.color = config.code.fontColor;
+	document.getElementById('clear').style.backgroundColor = config.background.fontColor;
+	document.getElementById('clear').style.color = config.background.color;
 
 	importFont.href = config.code.fontImportLink;
+
+	let transitionTime = '0.3s';
+
+	function clearBtnAnimation(){
+		document.getElementById('clear').addEventListener('mouseover', () => {
+			document.getElementById('clear').style.transition = transitionTime;
+	  	document.getElementById('clear').style.backgroundColor = 'red';
+	  	document.getElementById('clear').style.color = '#fff';
+		});
+		document.getElementById('clear').addEventListener('mouseout', () => {
+			document.getElementById('clear').style.transition = transitionTime;
+	  	document.getElementById('clear').style.backgroundColor = config.background.fontColor;
+	  	document.getElementById('clear').style.color = config.background.color;
+		});
+	}
+	clearBtnAnimation();
 
 	function sideMenuIconAnimation(){
 
 		let icons = ['0', '1', '2', '3', '4', '5'];
-    let transitionTime = '0.3s';
 
 		for(let a = 0; a < icons.length; a++){
 			document.querySelector('.icon'+icons[a]).addEventListener('mouseover', () => {
