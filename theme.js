@@ -7,7 +7,7 @@ const config = {
 	},
 	code: {
 		fontColor: '#09c8e6',
-		fontSize: '16',
+		fontSize: '15',
 		fontImportLink: 'https://fonts.googleapis.com/css?family=Open+Sans&display=swap',
 		fontFamily: 'Open Sans, sans-serif'
 	},

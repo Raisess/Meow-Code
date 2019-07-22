@@ -69,28 +69,6 @@ debug();
 // opções da barra lateral
 const sideOptions = ()=>{
 
-	// adicionar bibliotecas
-	const addLibs = ()=>{
-
-		const libsBtn = document.querySelector('#openLibs');
-		const libsWindow = document.querySelector('#libsWindow');
-
-		function open(){
-			libsBtn.addEventListener('click', () => {
-			  libsWindow.style.display = '';
-			  close();
-			});
-		}
-		function close(){
-			libsBtn.addEventListener('click', () => {
-			  libsWindow.style.display = 'none';
-			  open();
-			});	
-		}
-		open();
-	}
-	addLibs();
-
 	// configurações
 	const configs = ()=>{
 
@@ -175,29 +153,6 @@ const bottomUtilities = ()=>{
 }
 bottomUtilities();
 
-// settar as novas libs
-const setLibs = ()=>{
-
-	const jsLibLabel0 = document.querySelector('#jsLib0');
-	const cssLibLabel0 = document.querySelector('#cssLib0');
-	const jsLibLabel1 = document.querySelector('#jsLib1');
-	const cssLibLabel1 = document.querySelector('#cssLib1');
-
-	const setLibsBtn = document.querySelector('#setLibs');
-
-	setLibsBtn.addEventListener('click', () => {
-	  document.getElementById('jsLibLocation0').src = jsLibLabel0.value;
-	  document.getElementById('cssLibLocation0').href = cssLibLabel0.value;
-	  document.getElementById('jsLibLocation1').src = jsLibLabel1.value;
-	  document.getElementById('cssLibLocation1').href = cssLibLabel1.value;
-	  //console.log('js lib 0 setted to:', jsLibLabel0.value);
-	  //console.log('css lib 0 setted to:', cssLibLabel0.value);
-	  //console.log('js lib 1 setted to:', jsLibLabel1.value);
-	  //console.log('css lib 1 setted to:', cssLibLabel1.value);
-	});
-
-}
-setLibs();
 
 // janela para salvar arquivo
 const setArchiveName = ()=>{
@@ -255,7 +210,8 @@ const openPreviewWindow = ()=>{
 }
 openPreviewWindow();
 
-// sistema de arquivos
+// SISTEMA DE ARQUIVOS !!(importante)!!
+// #######################################################################################
 const fileSystem = ()=>{
 	
 	let n; // nome do arquivo na memória
@@ -352,7 +308,7 @@ const fileSystem = ()=>{
 		const openedArchives = document.getElementById('openedArchives');
 
 		openArchives.push(a);
-
+		// gerar arquivo no historico
 		for(o >= 0; o < openArchives.length; o++){
 			openedArchives.innerHTML += `
 				<div class="archive-box" id="archive${o}">
@@ -364,13 +320,14 @@ const fileSystem = ()=>{
 
 		x+=1;
 		g.push(String(x));
-
+		// settar nome do arquivo como input value
 		for(let i = 0; i < openArchives.length; i++){
 			document.querySelector('#arc'+g[i]).addEventListener('click', () => {
 		  	setArchiveNameValue(openArchives[i]);
 			});
 		}
 
+		// limpar historico
 		document.getElementById('clear').addEventListener('click', () => {
 		  
 		  document.getElementById('openedArchives').innerHTML = '<p style="text-align: center;">historico limpo</p>';
@@ -414,7 +371,9 @@ const fileSystem = ()=>{
 
 }
 fileSystem();
+// #######################################################################################
 
+// saida do mapa lateral
 const sideMapOutput = ()=>{
 
 	const sideMap = document.getElementById('sideMap');
@@ -494,7 +453,7 @@ const setConfig = ()=>{
 
 	function sideMenuIconAnimation(){
 
-		let icons = ['0', '1', '2', '3', '4', '5'];
+		let icons = ['0', '1', '2', '3', '4'];
 
 		for(let a = 0; a < icons.length; a++){
 			document.querySelector('.icon'+icons[a]).addEventListener('mouseover', () => {
@@ -512,6 +471,7 @@ const setConfig = ()=>{
 }
 setConfig();
 
+// downloads de temas
 const downloads = ()=>{
 
 	const cloudBtn = document.getElementById('download');
@@ -523,6 +483,7 @@ const downloads = ()=>{
 }
 downloads();
 
+// botão para o github
 const gitHub = ()=>{
 
 	const btn = document.getElementById('git');
