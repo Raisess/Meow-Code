@@ -21,5 +21,8 @@ const config = {
 	},
 	configWindow: {
 		color: '#191C2B'	
+	},
+	history: {
+		color: '#333'
 	}
 };

@@ -18,31 +18,33 @@
 <body id="body" style="margin: 0; position: fixed; font-family: sans-serif;	width: 100%; height: 100%; font-size: 17px;">
 	<div class="app">
 		<div class="side-menu" id="sideMenu">
-			<div class="box">
-				<div class="import-file icon0" title="abrir arquivo" id="importFile">
+			<div class="box" id="iconsPlace">
+				<div class="history icon0" title="historico de arquivos" id="history">
+					<i class="fas fa-history"></i>
+				</div>
+				<div class="import-file icon1" title="abrir arquivo" id="importFile">
 					<i class="fas fa-file-code"></i>
 				</div>
-				<div class="export-file icon1" title="salvar arquivo" id="exportFile">
+				<div class="export-file icon2" title="salvar arquivo" id="exportFile">
 					<i class="fas fa-save"></i>
 				</div>
-        <div class="downloads icon2" title="baixar novos temas" id="download">
+        <div class="downloads icon3" title="baixar novos temas" id="download">
 					<i class="fas fa-cloud-download-alt"></i>
         </div>
-        <div class="git icon3" title="gitHub" id="git">
+        <div class="git icon4" title="gitHub" id="git">
         	<i class="fab fa-github-alt"></i>
         </div>
-				<div class="open-config icon4" id="openConfig" title="configurações">
-					<i class="fas fa-cog"></i>
-				</div>
+			</div>
+			<div class="open-config icon5" style="cursor: pointer;" id="openConfig" title="configurações">
+				<i class="fas fa-cog"></i>
 			</div>
 		</div>
 		<div class="new-window">
-			<div class="libs-window" id="libsWindow" style="display: none;">
-				<input type="text" id="jsLib0" placeholder="js lib 0" />
-				<input type="text" id="cssLib0" placeholder="css lib 0" />
-				<input type="text" id="jsLib1" placeholder="js lib 1" />
-				<input type="text" id="cssLib1" placeholder="css lib 1" />
-				<button id="setLibs">set libs</button>
+			<div class="project-window" id="historyWindow" style="display: none;">
+				<h4 class="title">histórico completo da sessão</h4>
+				<hr />
+				<div class="archives" id="archivesPlace">		
+				</div>
 			</div>
 			<div class="config-window" id="configWindow" style="display: none;">
 				<div class="config-container" id='configContainer'>

@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.1.9';
+const version = '0.2.0';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -67,13 +67,13 @@ const debug = ()=>{
 debug();
 
 // opções da barra lateral
-const sideOptions = ()=>{
+const sideOptions = async ()=>{
 
 	// configurações
-	const configs = ()=>{
+	const configs = async ()=>{
 
-		const configWindow = document.querySelector('#configWindow');
-		const configBtn = document.querySelector('#openConfig');
+		const configWindow = await document.querySelector('#configWindow');
+		const configBtn = await document.querySelector('#openConfig');
 
 		function open(){
 			configBtn.addEventListener('click', () => {
@@ -153,12 +153,32 @@ const bottomUtilities = ()=>{
 }
 bottomUtilities();
 
+const openHistoryWindow = ()=>{
+
+	let historyBtn = document.getElementById('history');
+	let historyWindow = document.getElementById('historyWindow');
+
+	function open(){
+		historyBtn.addEventListener('click', () => {
+		  historyWindow.style.display = '';
+		  close();
+		});
+	}
+	function close(){
+		historyBtn.addEventListener('click', () => {
+		  historyWindow.style.display = 'none';
+		  open();
+		});
+	}
+	open();
+}
+openHistoryWindow();
 
 // janela para salvar arquivo
-const setArchiveName = ()=>{
+const setArchiveName = async ()=>{
 
-	const exportFileBtn = document.getElementById('exportFile');
-	const archiveWindow = document.getElementById('archiveWindow');
+	const exportFileBtn = await document.getElementById('exportFile');
+	const archiveWindow = await document.getElementById('archiveWindow');
 
 	exportFileBtn.addEventListener('click', () => {
 	  archiveWindow.style.display = '';
@@ -167,10 +187,10 @@ const setArchiveName = ()=>{
 setArchiveName();
 
 // janela para abrir arquivo
-const openImportArchive = ()=>{
+const openImportArchive = async ()=>{
 
-	const importWindow = document.getElementById('importWindow');
-	const importFileBtn = document.getElementById('importFile');
+	const importWindow = await document.getElementById('importWindow');
+	const importFileBtn = await document.getElementById('importFile');
 
 	importFileBtn.addEventListener('click', () => {
 	  importWindow.style.display = '';
@@ -212,10 +232,10 @@ openPreviewWindow();
 
 // SISTEMA DE ARQUIVOS !!(importante)!!
 // #######################################################################################
-const fileSystem = ()=>{
+let openArchives = []; // espaço na memória para arquivos abertos
+let n; // nome do arquivo na memória
+const fileSystem = async ()=>{
 	
-	let n; // nome do arquivo na memória
-	let openArchives = []; // espaço na memória para arquivos abertos
 	let g = []; // espaço na memória para o dom dos arquivos abertos
 	let x = -1;
 	let o = 0;
@@ -243,6 +263,7 @@ const fileSystem = ()=>{
 	  	case 13: // ENTER
 	  		importFile();
 	  		saveOpenArchivesNames(n);
+	  		fullHistory();
 	  		break;
 	  	default:
 	  		null;
@@ -316,6 +337,9 @@ const fileSystem = ()=>{
 				</div>
 				<hr id="line${o}" class="line" />
 			`;
+			fs.writeFile('./history.txt', `<p id="a${o}">${openArchives[o]}</p>`, (error)=>{
+				if(error) throw error;
+			});
 		}
 
 		x+=1;
@@ -371,6 +395,18 @@ const fileSystem = ()=>{
 
 }
 fileSystem();
+function fullHistory(){
+
+	fs.readFile('./history.txt', (error, content)=>{
+		if(error){
+			throw error;
+		}
+
+		document.getElementById('archivesPlace').innerHTML += content;
+	});
+
+}
+
 // #######################################################################################
 
 // saida do mapa lateral
@@ -387,24 +423,24 @@ const sideMapOutput = ()=>{
 sideMapOutput();
 
 // ativar as configurações e tema
-const setConfig = ()=>{
+const setConfig = async ()=>{
 
-	const body = document.getElementById('body');
-	let input = document.getElementById('input');
-	const sideMenu = document.getElementById('sideMenu');
-	let configWindow = document.getElementById('configWindow');
-	const configContainer = document.getElementById('configContainer');
-	let libsWindow = document.getElementById('libsWindow');
-	let libsWindowBtn = document.getElementById('setLibs');
-	const windowExport = document.getElementById('archiveWindow');
-	let windowExportLabel = document.getElementById('archiveNameExport');
-	const windowImport = document.getElementById('importWindow');
-	let windowImportLabel = document.getElementById('archiveNameImport');
-	let sideMap = document.getElementById('sideMap');
+	const body = await document.getElementById('body');
+	let input = await document.getElementById('input');
+	const sideMenu = await document.getElementById('sideMenu');
+	let configWindow = await document.getElementById('configWindow');
+	const configContainer = await document.getElementById('configContainer');
+	let projectWindow = await document.getElementById('historyWindow');
+	const windowExport = await document.getElementById('archiveWindow');
+	let windowExportLabel = await document.getElementById('archiveNameExport');
+	const windowImport = await document.getElementById('importWindow');
+	let windowImportLabel = await document.getElementById('archiveNameImport');
+	let sideMap = await document.getElementById('sideMap');
+	const historyBox = document.getElementById('archivesPlace');
 
-	let importFont = document.getElementById('newFont');
+	let importFont = await document.getElementById('newFont');
 
-	const currentTheme = document.getElementById('currentTheme');
+	const currentTheme = await document.getElementById('currentTheme');
 
 	currentTheme.innerHTML = themeName;
 
@@ -416,9 +452,7 @@ const setConfig = ()=>{
 	input.style.fontFamily = config.code.fontFamily;
 	sideMenu.style.backgroundColor = config.sideMenu.color;
 	sideMenu.style.color = config.sideMenu.iconsColor;
-	libsWindow.style.backgroundColor = config.libsWindow.color;
-	libsWindowBtn.style.backgroundColor = config.sideMenu.iconsColor;
-	libsWindowBtn.style.color = config.libsWindow.fontColor;
+	projectWindow.style.backgroundColor = config.libsWindow.color;
 	configWindow.style.backgroundColor = config.configWindow.color;
 	configContainer.style.backgroundColor = config.sideMenu.color;
 	configContainer.style.color = config.background.fontColor;
@@ -430,6 +464,7 @@ const setConfig = ()=>{
 	windowImportLabel.style.color = config.background.fontColor;
 	sideMap.style.backgroundColor = config.sideMenu.color;
 	sideMap.style.color = config.code.fontColor;
+	historyBox.style.backgroundColor = config.history.color;
 	document.getElementById('clear').style.backgroundColor = config.background.fontColor;
 	document.getElementById('clear').style.color = config.background.color;
 
@@ -453,7 +488,8 @@ const setConfig = ()=>{
 
 	function sideMenuIconAnimation(){
 
-		let icons = ['0', '1', '2', '3', '4'];
+		// quantidade de icones na sidebar
+		let icons = ['0', '1', '2', '3', '4', '5'];
 
 		for(let a = 0; a < icons.length; a++){
 			document.querySelector('.icon'+icons[a]).addEventListener('mouseover', () => {
@@ -464,6 +500,7 @@ const setConfig = ()=>{
         document.querySelector('.icon'+icons[a]).style.transition = transitionTime;
 			  document.querySelector('.icon'+icons[a]).style.color = config.sideMenu.iconsColor;
 			});
+			//console.log(i[a]);
 		}
 	}
 	sideMenuIconAnimation();
@@ -472,9 +509,9 @@ const setConfig = ()=>{
 setConfig();
 
 // downloads de temas
-const downloads = ()=>{
+const downloads = async ()=>{
 
-	const cloudBtn = document.getElementById('download');
+	const cloudBtn = await document.getElementById('download');
 	
 	cloudBtn.addEventListener('click', () => {
 	  window.open('https://meowcode.netlify.com/');
@@ -484,9 +521,9 @@ const downloads = ()=>{
 downloads();
 
 // botão para o github
-const gitHub = ()=>{
+const gitHub = async ()=>{
 
-	const btn = document.getElementById('git');
+	const btn = await document.getElementById('git');
 
 	btn.addEventListener('click', () => {
 	  window.open('https://github.com');
@@ -502,3 +539,5 @@ onOpenConsole();
 // checar o tempo de inicialização da aplicação
 document.getElementById('startTime').innerHTML = performance.now();
 console.log(performance.now());
+
+fullHistory();

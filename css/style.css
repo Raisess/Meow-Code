@@ -23,12 +23,24 @@ textarea::-webkit-scrollbar-thumb{
 }
 .side-menu .box{
 	margin-top: -8px;
+	height: 500px;
+	overflow: auto;
 }
 .side-menu .box *{
 	margin-top: 10px;
 	cursor: pointer;
 	text-align: center;
 }
+.box::-webkit-scrollbar{
+	width: 7px;
+}
+.box::-webkit-scrollbar-track{
+	background-color: #00000000;
+}
+.box::-webkit-scrollbar-thumb{
+	background-color: gray;
+}
+
 .open-config{
 	position: fixed;
 	margin-left: 9px;
@@ -110,34 +122,46 @@ textarea::-webkit-scrollbar-thumb{
 	height: 100px;
 	box-shadow: 0 0 4px #222;
 }
-.libs-window{
+.project-window{
 	position: fixed;
 	left: 50px;
 	z-index: 2;
-	width: 30%;
+	width: 300px;
 	height: 96.4%;
 	color: #fff;
 }
-.libs-window *{
+.project-window *{
 	padding: 5px;
 	margin-top: 5px;
 	margin-left: 5px;
 }
-.libs-window input{
-	width: 95%;
-	height: 20px;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #333;
+.project-window hr{
+	width: 90%;
+	padding: 0;
+	margin-top: -10px;
 }
-.libs-window button{
-	width: 80%;
-	height: 30px;
-	border-style: none;
-	margin-left: 8%;
-	border-radius: 5px;
-	font-size: 20px;
-	cursor: pointer;
+.project-window .title{
+	padding-top: 20px;
+}
+.archives{
+	overflow: auto;
+	width: 90%;
+	height: 80%;
+	padding-top: 20px;
+}
+.archives p{
+	cursor: ;
+	margin-left: 5px;
+	margin-top: -15px;
+}
+.archives::-webkit-scrollbar{
+	width: 8px;
+}
+.archives::-webkit-scrollbar-track{
+	background-color: #555555;
+}
+.archives::-webkit-scrollbar-thumb{
+	background-color: #111;
 }
 
 .config-window{
