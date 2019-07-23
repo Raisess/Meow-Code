@@ -5,235 +5,16 @@
 // Meow Code
 
 // versão do código
-const version = '0.2.0';
+const version = '0.2.1';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
-// indetificador e retorno de erros
-const errorStyle = 'color: red; text-align: center; margin-top: 30%;';
-const errors = [
-	[
-		'',
-	],
-	[
-		`<h3 style="${errorStyle}">parece que não à nada no seu HTML!</h3>`,
-	]
-];
-
-// snippets padrão
-const defaultSnippets = [
- 'html',
- 'react',
- 'boots'
-]
-
-// aplicar o preview
-const debug = ()=>{
-	
-	// saida da previa
-	const debugWindow = document.querySelector('#output');
-	// valor do textarea
-	const toDebug = document.querySelector('#input');
-
-	// valor padrão da previa
-	debugWindow.innerHTML = '<h3 style="color: blue; text-align: center; margin-top: 30%;">previa do seu projeto</h3>';
-
-	// checar o valor do textarea
-	toDebug.addEventListener('blur', () => {
-
-		if(toDebug.value === errors[0][0]){ //retorna o erro de valor null || undefined
-			debugWindow.innerHTML = errors[1][0];
-		}
-		else if(toDebug.value === 'creator'){ // easter egg
-			debugWindow.innerHTML = '<p><b>Danilo Santana</b></p>';
-		}
-		else if(toDebug.value === defaultSnippets[0]){ // boilerplate HTML5
-			toDebug.value = snippets[0];
-		}
-		else if(toDebug.value === defaultSnippets[1]){ // add react
-			toDebug.value = snippets[1];
-		}
-		else if(toDebug.value === defaultSnippets[2]){ // add bootstrap
-			toDebug.value = snippets[2];
-		}
-		// aplicar o cádigo para saida
-		else{
-			debugWindow.innerHTML = `${toDebug.value}`;	
-		}
-	  
-	});
-
-}
-debug();
-
-// opções da barra lateral
-const sideOptions = async ()=>{
-
-	// configurações
-	const configs = async ()=>{
-
-		const configWindow = await document.querySelector('#configWindow');
-		const configBtn = await document.querySelector('#openConfig');
-
-		function open(){
-			configBtn.addEventListener('click', () => {
-			  configWindow.style.display = '';
-			  close();
-			});
-		}
-		function close(){
-			configBtn.addEventListener('click', () => {
-			  configWindow.style.display = 'none';
-			  open();
-			});	
-		}
-		open();
-	}
-	configs();
-
-}
-sideOptions();
-
-// utilidades da barrra de rodapé
-const bottomUtilities = ()=>{
-
-	function clock(){
-
-		const clockDisplay = document.getElementById('clock');
-
-		let time = new Date();
-		let hours = time.getHours();
-		let mins = time.getMinutes();
-		//let sec = time.getSeconds();
-
-		if(hours < 10){
-			return clockDisplay.innerHTML = '0'+hours+':'+mins;
-		}
-		else if(mins < 10){
-			return clockDisplay.innerHTML = hours+':0'+mins;
-		}
-		else if(hours < 10 && mins < 10){
-			return clockDisplay.innerHTML = '0'+hours+':0'+mins;
-		}
-		else{
-			return clockDisplay.innerHTML = hours+':'+mins;	
-		}
-
-	}
-	setInterval(() => {
-	  clock();
-	}, 1000);
-
-	function getTheme(){
-
-		const themeDisplay = document.getElementById('theme');
-
-		themeDisplay.innerHTML += themeName;
-	}
-	getTheme();
-
-	function setFontSize(){
-
-		const label = document.getElementById('fontSize');
-		let input = document.getElementById('input');
-
-		label.value = config.code.fontSize;
-
-		document.getElementById('font').innerHTML = config.code.fontSize+'px';
-
-		label.addEventListener('blur', () => {
-
-			input.style.fontSize = label.value+'px';
-			document.getElementById('font').innerHTML = label.value+'px';
-
-		});
-	}
-	setFontSize();
-
-}
-bottomUtilities();
-
-const openHistoryWindow = ()=>{
-
-	let historyBtn = document.getElementById('history');
-	let historyWindow = document.getElementById('historyWindow');
-
-	function open(){
-		historyBtn.addEventListener('click', () => {
-		  historyWindow.style.display = '';
-		  close();
-		});
-	}
-	function close(){
-		historyBtn.addEventListener('click', () => {
-		  historyWindow.style.display = 'none';
-		  open();
-		});
-	}
-	open();
-}
-openHistoryWindow();
-
-// janela para salvar arquivo
-const setArchiveName = async ()=>{
-
-	const exportFileBtn = await document.getElementById('exportFile');
-	const archiveWindow = await document.getElementById('archiveWindow');
-
-	exportFileBtn.addEventListener('click', () => {
-	  archiveWindow.style.display = '';
-	});
-}
-setArchiveName();
-
-// janela para abrir arquivo
-const openImportArchive = async ()=>{
-
-	const importWindow = await document.getElementById('importWindow');
-	const importFileBtn = await document.getElementById('importFile');
-
-	importFileBtn.addEventListener('click', () => {
-	  importWindow.style.display = '';
-	});
-}
-openImportArchive();
-
-// abrir a janela de prévia para HTML
-const openPreviewWindow = ()=>{
-
-	const onOff = document.getElementById('onOff');
-	const html = document.getElementById('output');
-
-	let sideMap = document.getElementById('sideMap');
-
-	const code = document.getElementById('input');
-
-	function open(){
-		onOff.addEventListener('click', () => {
-		  html.style.display = '';
-		  sideMap.style.display = 'none';
-		  code.style.width = '55.9%';
-		  onOff.innerHTML = 'html preview on';
-		  close();
-		});
-	}
-	function close(){
-		onOff.addEventListener('click', () => {
-		  html.style.display = 'none';
-		  sideMap.style.display = '';
-		  code.style.width = '100.5%';
-		  onOff.innerHTML = 'html preview off';
-		  open();
-		});
-	}
-	open();
-}
-openPreviewWindow();
 
 // SISTEMA DE ARQUIVOS !!(importante)!!
 // #######################################################################################
 let openArchives = []; // espaço na memória para arquivos abertos
 let n; // nome do arquivo na memória
+let his = [];
 const fileSystem = async ()=>{
 	
 	let g = []; // espaço na memória para o dom dos arquivos abertos
@@ -328,6 +109,20 @@ const fileSystem = async ()=>{
 
 		const openedArchives = document.getElementById('openedArchives');
 
+		// settar a data e hora no historico
+		const time = new Date();
+		let day = (time.getDay())+21;
+		let month = (time.getMonth())+1;
+		let year = (time.getYear())-100;
+		let hour = time.getHours();
+		let min = time.getMinutes();
+
+		if(day < 10) day = '0'+(time.getDay()+21);
+		if(month < 10) month = '0'+(time.getMonth()+1);
+		if(year < 10) year = '0'+(time.getYear()-100);
+		if(min < 10) min = '0'+time.getMinutes();
+		if(hour < 10) hour = '0'+time.getHours();
+
 		openArchives.push(a);
 		// gerar arquivo no historico
 		for(o >= 0; o < openArchives.length; o++){
@@ -337,7 +132,10 @@ const fileSystem = async ()=>{
 				</div>
 				<hr id="line${o}" class="line" />
 			`;
-			fs.writeFile('./history.txt', `<p id="a${o}">${openArchives[o]}</p>`, (error)=>{
+			his.push(`<p id="a${o}">${day}/${month}/${year}, ${hour}:${min} | ${openArchives[o]}</p>`);
+			console.log(his);
+			// escrever no arquivo history.txt
+			fs.writeFile('./history.txt', his, (error)=>{
 				if(error) throw error;
 			});
 		}
@@ -395,141 +193,23 @@ const fileSystem = async ()=>{
 
 }
 fileSystem();
-function fullHistory(){
+async function fullHistory(){
 
 	fs.readFile('./history.txt', (error, content)=>{
 		if(error){
 			throw error;
 		}
 
-		document.getElementById('archivesPlace').innerHTML += content;
+		document.getElementById('archivesPlace').innerHTML = content;
+		his.push(content);
+		console.log(his);
 	});
 
 }
 
 // #######################################################################################
 
-// saida do mapa lateral
-const sideMapOutput = ()=>{
 
-	const sideMap = document.getElementById('sideMap');
-	const input = document.getElementById('input');
-
-	setInterval(() => {
-	  sideMap.value = String(input.value);
-	}, 1);
-
-}
-sideMapOutput();
-
-// ativar as configurações e tema
-const setConfig = async ()=>{
-
-	const body = await document.getElementById('body');
-	let input = await document.getElementById('input');
-	const sideMenu = await document.getElementById('sideMenu');
-	let configWindow = await document.getElementById('configWindow');
-	const configContainer = await document.getElementById('configContainer');
-	let projectWindow = await document.getElementById('historyWindow');
-	const windowExport = await document.getElementById('archiveWindow');
-	let windowExportLabel = await document.getElementById('archiveNameExport');
-	const windowImport = await document.getElementById('importWindow');
-	let windowImportLabel = await document.getElementById('archiveNameImport');
-	let sideMap = await document.getElementById('sideMap');
-	const historyBox = document.getElementById('archivesPlace');
-
-	let importFont = await document.getElementById('newFont');
-
-	const currentTheme = await document.getElementById('currentTheme');
-
-	currentTheme.innerHTML = themeName;
-
-	body.style.backgroundColor = config.background.color;
-	body.style.color = config.background.fontColor;
-	input.style.backgroundColor = config.background.color;
-	input.style.color = config.code.fontColor;
-	input.style.fontSize = config.code.fontSize+'px';
-	input.style.fontFamily = config.code.fontFamily;
-	sideMenu.style.backgroundColor = config.sideMenu.color;
-	sideMenu.style.color = config.sideMenu.iconsColor;
-	projectWindow.style.backgroundColor = config.libsWindow.color;
-	configWindow.style.backgroundColor = config.configWindow.color;
-	configContainer.style.backgroundColor = config.sideMenu.color;
-	configContainer.style.color = config.background.fontColor;
-	windowExport.style.backgroundColor = config.sideMenu.color;
-	windowExportLabel.style.backgroundColor = config.background.color;
-	windowExportLabel.style.color = config.background.fontColor;
-	windowImport.style.backgroundColor = config.sideMenu.color;
-	windowImportLabel.style.backgroundColor = config.background.color;
-	windowImportLabel.style.color = config.background.fontColor;
-	sideMap.style.backgroundColor = config.sideMenu.color;
-	sideMap.style.color = config.code.fontColor;
-	historyBox.style.backgroundColor = config.history.color;
-	document.getElementById('clear').style.backgroundColor = config.background.fontColor;
-	document.getElementById('clear').style.color = config.background.color;
-
-	importFont.href = config.code.fontImportLink;
-
-	let transitionTime = '0.3s';
-
-	function clearBtnAnimation(){
-		document.getElementById('clear').addEventListener('mouseover', () => {
-			document.getElementById('clear').style.transition = transitionTime;
-	  	document.getElementById('clear').style.backgroundColor = 'red';
-	  	document.getElementById('clear').style.color = '#fff';
-		});
-		document.getElementById('clear').addEventListener('mouseout', () => {
-			document.getElementById('clear').style.transition = transitionTime;
-	  	document.getElementById('clear').style.backgroundColor = config.background.fontColor;
-	  	document.getElementById('clear').style.color = config.background.color;
-		});
-	}
-	clearBtnAnimation();
-
-	function sideMenuIconAnimation(){
-
-		// quantidade de icones na sidebar
-		let icons = ['0', '1', '2', '3', '4', '5'];
-
-		for(let a = 0; a < icons.length; a++){
-			document.querySelector('.icon'+icons[a]).addEventListener('mouseover', () => {
-        document.querySelector('.icon'+icons[a]).style.transition = transitionTime;
-			  document.querySelector('.icon'+icons[a]).style.color = config.code.fontColor;
-			});
-			document.querySelector('.icon'+icons[a]).addEventListener('mouseout', () => {
-        document.querySelector('.icon'+icons[a]).style.transition = transitionTime;
-			  document.querySelector('.icon'+icons[a]).style.color = config.sideMenu.iconsColor;
-			});
-			//console.log(i[a]);
-		}
-	}
-	sideMenuIconAnimation();
-
-}
-setConfig();
-
-// downloads de temas
-const downloads = async ()=>{
-
-	const cloudBtn = await document.getElementById('download');
-	
-	cloudBtn.addEventListener('click', () => {
-	  window.open('https://meowcode.netlify.com/');
-	});
-
-}
-downloads();
-
-// botão para o github
-const gitHub = async ()=>{
-
-	const btn = await document.getElementById('git');
-
-	btn.addEventListener('click', () => {
-	  window.open('https://github.com');
-	});
-}
-gitHub();
 
 const onOpenConsole = ()=>{
 	console.log('%cpara usar o JavaScript clique no icone do olho ali em cima para usar as live expressions', 'font-size: 20px; color: orange;');
