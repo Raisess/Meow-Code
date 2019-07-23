@@ -140,7 +140,7 @@ const fileSystem = async ()=>{
 				</div>
 				<hr id="line${o}" class="line" />
 			`;
-			his.push(`<p id="a${o}" style="color: ${color};">${day}/${month}/${year}, ${hour}:${min} | ${openArchives[o]}</p>`);
+			his.push(`<p id="a${o}" style="color: ${color};">${day}/${month}/${year}, ${hour}:${min} |<b>${openArchives[o]}</b></p>`);
 			console.log(his);
 			// escrever no arquivo history.txt
 			fs.writeFile('./history.txt', his, (error)=>{
