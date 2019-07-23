@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.2.1';
+const version = '0.2.2';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -117,11 +117,19 @@ const fileSystem = async ()=>{
 		let hour = time.getHours();
 		let min = time.getMinutes();
 
+		let color = '#fff';
+
 		if(day < 10) day = '0'+(time.getDay()+21);
 		if(month < 10) month = '0'+(time.getMonth()+1);
 		if(year < 10) year = '0'+(time.getYear()-100);
 		if(min < 10) min = '0'+time.getMinutes();
 		if(hour < 10) hour = '0'+time.getHours();
+
+		if(hour >= 22) color = '#f21f07';
+		if(hour >= 18 && hour < 22 ) color = '#4e0ddb';
+		if(hour >= 13 && hour < 18) color = '#26f207';
+		if(hour >= 10 && hour < 13) color = '#fc5000';
+		if(hour >= 6 && hour < 10) color = '#09ebc1';
 
 		openArchives.push(a);
 		// gerar arquivo no historico
@@ -132,7 +140,7 @@ const fileSystem = async ()=>{
 				</div>
 				<hr id="line${o}" class="line" />
 			`;
-			his.push(`<p id="a${o}">${day}/${month}/${year}, ${hour}:${min} | ${openArchives[o]}</p>`);
+			his.push(`<p id="a${o}" style="color: ${color};">${day}/${month}/${year}, ${hour}:${min} | ${openArchives[o]}</p>`);
 			console.log(his);
 			// escrever no arquivo history.txt
 			fs.writeFile('./history.txt', his, (error)=>{
