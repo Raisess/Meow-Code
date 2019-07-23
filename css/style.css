@@ -148,11 +148,12 @@ textarea::-webkit-scrollbar-thumb{
 	width: 90%;
 	height: 80%;
 	padding-top: 20px;
+	color: transparent;
 }
 .archives p{
 	cursor: ;
 	margin-left: 5px;
-	margin-top: -15px;
+	margin-top: -25px;
 }
 .archives::-webkit-scrollbar{
 	width: 8px;
