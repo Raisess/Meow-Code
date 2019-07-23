@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.2.2';
+const version = '0.2.3';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
