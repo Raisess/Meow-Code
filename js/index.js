@@ -5,7 +5,7 @@
 // Meow Code
 
 // versão do código
-const version = '0.2.3';
+const version = '0.2.4';
 // aplicar a versão no titulo
 document.getElementById('title').innerHTML += `${version} created by Danilo Santana`;
 
@@ -15,6 +15,8 @@ document.getElementById('title').innerHTML += `${version} created by Danilo Sant
 let openArchives = []; // espaço na memória para arquivos abertos
 let n; // nome do arquivo na memória
 let his = [];
+let push = true;
+
 const fileSystem = async ()=>{
 	
 	let g = []; // espaço na memória para o dom dos arquivos abertos
@@ -141,6 +143,7 @@ const fileSystem = async ()=>{
 				<hr id="line${o}" class="line" />
 			`;
 			his.push(`<p id="a${o}" style="color: ${color};">${day}/${month}/${year}, ${hour}:${min} |<b>${openArchives[o]}</b></p>`);
+			push = false;
 			console.log(his);
 			// escrever no arquivo history.txt
 			fs.writeFile('./history.txt', his, (error)=>{
@@ -209,7 +212,9 @@ async function fullHistory(){
 		}
 
 		document.getElementById('archivesPlace').innerHTML = content;
-		his.push(content);
+
+		if(push) his.push(content);
+
 		console.log(his);
 	});
 
